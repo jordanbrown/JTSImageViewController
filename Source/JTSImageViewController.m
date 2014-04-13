@@ -116,7 +116,6 @@
     [self setTransition:transition];
     
     _statusBarHiddenPriorToPresentation = [UIApplication sharedApplication].statusBarHidden;
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     if (self.mode == JTSImageViewControllerMode_Image) {
         if (transition == JTSImageViewControllerTransition_FromOffscreen) {
@@ -504,7 +503,7 @@
                                                                        CGAffineTransformMakeScale(MAX_BACK_SCALING, MAX_BACK_SCALING));
                  
                  if (weakSelf.backgroundStyle == JTSImageViewControllerBackgroundStyle_ScaledDimmedBlurred) {
-                     [weakSelf.blurredSnapshotView setAlpha:0.2f];
+                     [weakSelf.blurredSnapshotView setAlpha:1];
                  }
                  
                  [weakSelf addMotionEffectsToSnapshotView];
@@ -968,7 +967,7 @@
     
     UIGraphicsEndImageContext();
     
-    UIImage *blurredImage = [image JTS_applyBlurWithRadius:3.0f tintColor:[UIColor colorWithWhite:0.0f alpha:0.2f] saturationDeltaFactor:0.8f maskImage:nil];
+    UIImage *blurredImage = [image JTS_applyBlurWithRadius:3.0f tintColor:nil saturationDeltaFactor:1.0f maskImage:nil];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:contextBounds];
     [imageView setImage:blurredImage];
     [imageView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
