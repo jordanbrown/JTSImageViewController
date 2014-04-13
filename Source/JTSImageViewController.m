@@ -171,7 +171,7 @@
 #pragma mark - UIViewController
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (BOOL)shouldAutorotate {
