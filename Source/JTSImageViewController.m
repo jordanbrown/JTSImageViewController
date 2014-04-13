@@ -1419,7 +1419,8 @@
     [self setImageIsFlickingAwayForDismissal:YES];
     __weak JTSImageViewController *weakSelf = self;
     UIPushBehavior *push = [[UIPushBehavior alloc] initWithItems:@[self.imageView] mode:UIPushBehaviorModeInstantaneous];
-    [push setPushDirection:CGVectorMake(velocity.x*0.5, velocity.y*0.5)];
+    CGFloat flickSpeed = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 0.5 : 0.1;
+    [push setPushDirection:CGVectorMake(velocity.x*flickSpeed, velocity.y*flickSpeed)];
     [push setTargetOffsetFromCenter:self.imageDragOffsetFromImageCenter forItem:self.imageView];
     [push setAction:^{
         if ([weakSelf imageViewIsOffscreen]) {
