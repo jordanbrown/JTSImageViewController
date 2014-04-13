@@ -962,7 +962,14 @@
     UIGraphicsBeginImageContextWithOptions(contextBounds.size, YES, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextConcatCTM(context, CGAffineTransformMakeTranslation(outerBleed, outerBleed));
-    [presentingViewController.view.layer renderInContext:context];
+    
+    // [presentingViewController.view.layer renderInContext:context];
+    
+    // drawViewHierarchy is faster then CALayer' renderInContext.
+    // Using drawViewHierachy also solves the bug where the UINavigationBar and UIToolBar were
+    // showing up as black in the snapshot.
+    [presentingViewController.view drawViewHierarchyInRect:presentingViewController.view.bounds afterScreenUpdates:YES];
+    
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
